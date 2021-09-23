@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use App\Controllers\Templating;
+use App\Controllers\Templatingr;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -40,6 +43,8 @@ $routes->get('/', function () {
     echo view('v_home');
     echo view('layouts/footer');
 });
+$routes->get('admin', 'Templating::index');
+
 $routes->get('/post', 'PostController::index');
 $routes->get('/about', function () {
     $data = [
