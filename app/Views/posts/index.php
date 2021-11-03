@@ -206,29 +206,32 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
+                                <li class="breadcrumb-item active">My Posts v1</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-
+            <!-- /.content-header -->
+            <!--main konten-->
             <div class="container">
-                <a href="/admin/posts/create" class="btn btn-primary"><i class="fas fa-plus"></i>Tambah Data </a>
+                <a href="/admin/posts/create" class="btn btn-primary"><i class="fas fa-plus"></i> tambah data</a>
                 <div class="card mt-3">
                     <div class="card-header">
                         Daftar Postingan
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+
+
                             <table class="table table-striped text-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No.</th>
+                                        <th scope="col">No </th>
                                         <th scope="col">Judul</th>
                                         <th scope="col">slug</th>
+                                        <th scope="col">Kategori</th>
                                         <th scope="col">author</th>
-                                        <th scope="col">kategori</th>
                                         <th scope="col">action</th>
                                     </tr>
                                 </thead>
@@ -236,13 +239,13 @@
                                     <?php foreach ($posts as $i => $post) : ?>
                                         <tr>
                                             <th scope="row"><?= $i + 1; ?></th>
-                                            <td><?= $post['judul'] ?></td>
-                                            <td><?= $post['slug'] ?></td>
-                                            <td><?= $post['author'] ?></td>
-                                            <td><?= $post['kategori'] ?></td>
+                                            <td><?= $post['judul']; ?></td>
+                                            <td><?= $post['slug']; ?></td>
+                                            <td><?= $post['author']; ?></td>
+                                            <td><?= $post['kategori']; ?></td>
                                             <td>
-                                                <a href="/admin/posts/edit<?= $post['slug'] ?>" class="btn btn-sm btn-warning me-1"><i class="fa fa-edit"></i>Edit</a>
-                                                <a href="/admin/posts/delete<?= $post['slug'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</a>
+                                                <a href="/admin/posts/edit/<?= $post['slug'] ?>" class="btn btn-sm btn-warning me-1"><i class="fa fa-edit"></i>Edit</a>
+                                                <a href="/admin/posts/delete/<?= $post['post_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda akan menghapus postingan?');"><i class="fa fa-trash"></i>Delete</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -252,6 +255,9 @@
                     </div>
                 </div>
             </div>
+            <!--/.hh -->
+            </section>
+            <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">

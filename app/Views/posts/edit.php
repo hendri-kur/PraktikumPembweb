@@ -168,10 +168,12 @@
                     </div>
                 </div>
 
-                <!-- SidebarSearch Form -->
+                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item ">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <li class="nav-item">
                             <a href="/admin" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -179,7 +181,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item">
                             <a href="/admin/posts" class="nav-link">
                                 <i class="nav-icon fas fa-book-open"></i>
                                 <p>
@@ -194,12 +196,11 @@
             <!-- /.sidebar -->
         </aside>
 
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">My Posts</h1>
@@ -214,18 +215,22 @@
                 </div><!-- /.container-fluid -->
             </div>
 
+            <!-- /.content-header -->
             <div class="container">
                 <div class="card">
                     <div class="card-header">
-                        Form Tambah Post
+                        Form Edit Posts
                     </div>
                     <div class="card-body">
-                        <form action="/admin/posts/store" method="POST">
+                        <form action="/admin/posts/saveedit/<?= $posts['post_id'] ?>" method="POST">
                             <div class="row">
                                 <div class="col-md-4">
+
+                                    <input type="hidden" id="post_id" name="post_id" value="<?= $posts['post_id']; ?>">
+
                                     <div class="form-group">
                                         <label for="judul">Judul Postingan</label>
-                                        <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" value="<?= old('judul'); ?>">
+                                        <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" value="<?= $posts['judul'] ?>">
                                         <?php if ($validation->hasError('judul')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= $validation->getError('judul'); ?>
@@ -233,8 +238,8 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
-                                        <label for="slug">slug</label>
-                                        <input type="text" class="form-control <?= ($validation->hasError('slug')) ? 'is-invalid' : ''; ?>" id="slug" name="slug" value="<?= old('slug'); ?>">
+                                        <label for="slug">Slug Postingan</label>
+                                        <input type="text" class="form-control <?= ($validation->hasError('slug')) ? 'is-invalid' : ''; ?>" id="slug" name="slug" value="<?= $posts['slug'] ?>">
                                         <?php if ($validation->hasError('slug')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= $validation->getError('slug'); ?>
@@ -243,7 +248,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="kategori">Kategori Postingan</label>
-                                        <input type="text" class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>" id="kategori" name="kategori" value="<?= old('kategori'); ?>">
+                                        <input type="text" class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>" id="kategori" name="kategori" value="<?= $posts['kategori'] ?>">
                                         <?php if ($validation->hasError('kategori')) : ?>
                                             <div class="invalid-feedback">
                                                 <?= $validation->getError('kategori'); ?>
@@ -252,46 +257,48 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="author">Author</label>
-                                        <input type="text" class="form-control <?= ($validation->hasError('author')) ? 'is-invalid' : ''; ?>" id="author" name="author" value="<?= old('author'); ?>">
+                                        <input type="text" class="form-control <?= ($validation->hasError('author')) ? 'is-invalid' : ''; ?>" id="author" name="author" value="<?= $posts['author'] ?>">
                                         <?php if ($validation->hasError('author')) : ?>
-                                            <div class="invalid-feedback">
+                                            <div class=" invalid-feedback">
                                                 <?= $validation->getError('author'); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-paper-plane"></i>Submit
-                                    </button>
                                 </div>
                                 <div class="col-md-8">
-                                    <label for="deskripsi">Deskripsi Postingan </label><br>
-                                    <textarea name="deskripsi" id="deskripsi" class="form-control <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?><?= old('author'); ?>"></textarea>
-                                    <?php if ($validation->hasError('deskripsi')) : ?>
-                                        <div class="invalid-feedback">
-                                            <?= $validation->getError('deskripsi'); ?>
-                                        </div>
-                                    <?php endif; ?>
+                                    <div class="form-group">
+                                        <label for="deskripsi">Deskripsi</label>
+                                        <br>
+                                        <textarea name="deskripsi" id="deskripsi" class="form-control <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>"><?= $posts['deskripsi'] ?></textarea>
+                                        <?php if ($validation->hasError('deskripsi')) : ?>
+                                            <div class=" invalid-feedback">
+                                                <?= $validation->getError('deskripsi'); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
-            </div>
-        </footer>
+        <!-- /.card -->
+        </section>
+        <!-- right col -->
+    </div>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
